@@ -37,17 +37,8 @@ def offset_parser(offset_str:str):
     hours = offset_str.strip
 
 
-class Cocktail(BaseModel):
-    name: str
-    tagline: str
-    ingredients: List[str]
-    instructions: str
 
-for i in range(1, 150):
-    response = requests.get('http://127.0.0.1:8000/random_cocktail/')
-    data = response.json()
-    name = data['name']
-    print(name)
+
 
 # Check if the request was successful
 if response.status_code == 200:

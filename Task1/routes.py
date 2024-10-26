@@ -33,3 +33,7 @@ def get_random_cocktail():
         "ingredients": ingredients,
         "instructions": instructions
     }
+
+if __name__ == "__main__":
+    import uvicorn
+    uvicorn.run(app)

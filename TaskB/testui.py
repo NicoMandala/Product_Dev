@@ -66,3 +66,7 @@ sample_cocktail = json.dumps(response.json())
 
 # Test the function
 visualize_cocktail_recipe(sample_cocktail)
+
+
+if __name__ == "__main__":
+    pass
