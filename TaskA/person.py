@@ -55,8 +55,7 @@ def get_person():
                 return first_name, first_letter, local_time
                 
         else:
-            print("Failed to fetch data from the API.")
-            return None, None, None
+            pass
     except Exception as e:
         print(f"An error occurred: {e}")
         return None, None, None

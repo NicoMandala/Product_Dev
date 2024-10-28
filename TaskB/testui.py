@@ -25,14 +25,14 @@ def visualize_cocktail_recipe(cocktail_json):
     for ingredient in ingredients:
         recipe_info += f"- {ingredient}\n"
     recipe_info += f"\n**Instructions**: {instructions}"
-
+    print(recipe_info)
     # Create a visual representation of the cocktail ingredients
     fig, ax = plt.subplots(figsize=(3, 6))
-    total_quantity = sum([float(ingredient.split(" - ")[1].split()[0]) for ingredient in ingredients if " - " in ingredient])
-    # try:
-    #     total_quantity = sum([float(ingredient.split(" - ")[1].split()[0]) for ingredient in ingredients if " - " in ingredient])
-    # except:
-    #     total_quantity = sum([float(Fraction(ingredient.split(" - ")[1].split()[0])) for ingredient in ingredients if " - " in ingredient])
+    # total_quantity = sum([float(ingredient.split(" - ")[1].split()[0]) for ingredient in ingredients if " - " in ingredient])
+    try:
+        total_quantity = sum([float(ingredient.split(" - ")[1].split()[0]) for ingredient in ingredients if " - " in ingredient])
+    except:
+        pass
 
     y_offset = 0
 
@@ -69,4 +69,11 @@ visualize_cocktail_recipe(sample_cocktail)
 
 
 if __name__ == "__main__":
-    pass
+    # Function to get a random cocktail recipe
+    response = requests.get('http://127.0.0.1:8000/random_cocktail/')
+    # Sample cocktail JSON data
+    sample_cocktail = json.dumps(response.json())
+
+    # Test the function
+    visualize_cocktail_recipe(sample_cocktail)
+  
