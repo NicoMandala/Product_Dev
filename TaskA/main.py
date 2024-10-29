@@ -1,4 +1,4 @@
-# the aim of this script is the following
+# The aim of this script is the following
 # 1. Use Person API to get the local time and first name of the user 
 # 2. if the local time is daytime, suggest a random cocktail from the database
 # 3. if the local time is nighttime, suggest a cocktail with the first letter of the first name of the user
@@ -9,18 +9,24 @@ import requests
 import sqlite3
 import datetime
 
-from person import get_person
+from TaskA.person import get_person
 
 # connect to the database
-conn = sqlite3.connect('tutorials.db')
+# conn = sqlite3.connect('tutorials.db')
 
-cur = conn.cursor()
+# cur = conn.cursor()
 # get the person details
-first_name, first_letter, local_time = get_person()
+# first_name, first_letter, local_time = get_person()
 
 def suggest_cocktail():
+    # connect to the database
+    conn = sqlite3.connect('tutorials.db', check_same_thread=False)
+
+    cur = conn.cursor()
+
     try:
-        
+        # get the person details
+        first_name, first_letter, local_time = get_person()
         # check if the local time is available
         if local_time:
             # check if it is daytime
@@ -30,6 +36,12 @@ def suggest_cocktail():
                 random_cocktail = cur.fetchone()
                 print("Selecting a random cocktail from the database because it is daytime")
                 print(f"ehi {first_name}, why don't you try a {random_cocktail[1]}?")
+
+                return ({"first_name":first_name,
+                         "first_letter":first_letter,
+                         "local_time":local_time,
+                         "suggestion":f"ehi {first_name}, why don't you try a {random_cocktail[1]}?"
+                         })
             else:
                 # night time
                 # suggest a cocktail with the first letter of first name if it exists in the list
@@ -45,7 +57,11 @@ def suggest_cocktail():
                         cocktail = cur.fetchone()
                         print("Selecting a cocktail from the database based on the first letter of the first name")
                         print(f"ehi {first_name}, why don't you try a {cocktail[1]}?")
-
+                        return ({"first_name":first_name,
+                         "first_letter":first_letter,
+                         "local_time":local_time,
+                         "suggestion":f"ehi {first_name}, why don't you try a {cocktail[1]}?"
+                         })
                     
                     except:
                         cur.execute("""SELECT * FROM cocktails 
@@ -53,8 +69,12 @@ def suggest_cocktail():
                                     LIMIT 1;""")
                         cocktail = cur.fetchone()
                         print("Selecting a random cocktail from the database because there is no matching cocktail for the first name")
-                        print(f"ehi {first_name}, why don't you try a cocktail just made for you {cocktail[1]}?")
-
+                        print(f"ehi {first_name}, how about a cocktail just made for you {cocktail[1]}?")
+                        return ({"first_name":first_name,
+                         "first_letter":first_letter,
+                         "local_time":local_time,
+                         "suggestion":f"ehi {first_name}, how about a cocktail just made for you {cocktail[1]}?"
+                         })
                         
                 else:
                     try:
@@ -63,8 +83,14 @@ def suggest_cocktail():
                                     LIMIT 1;""")
                         cocktail = cur.fetchone()
                         print("Selecting a random cocktail from the database because the first name is not in English alphabet")
-                        print(f"ehi {first_name}, why don't you try a {cocktail[1]}?")
-                        
+                        print(f"ehi {first_name}, how about a {cocktail[1]}?")
+
+                        return {"first_name":first_name,
+                         "first_letter":first_letter,
+                         "local_time":local_time,
+                         "suggestion":f"ehi {first_name}, how about a {cocktail[1]}?"
+                         }
+                    
                     except Exception as e:
                         print(f"Print an error occurred: {e}")
     except Exception as e:  
