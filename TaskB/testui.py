@@ -9,7 +9,7 @@ from fractions import Fraction
 
 
 # Function to get a random cocktail recipe
-response = requests.get('http://127.0.0.1:8000/random_cocktail/')
+response = requests.get('http://127.0.0.1:8000/cocktail/')
 
 # Function to visualize a cocktail recipe
 def visualize_cocktail_recipe(cocktail_json):
@@ -30,7 +30,9 @@ def visualize_cocktail_recipe(cocktail_json):
     fig, ax = plt.subplots(figsize=(3, 6))
     # total_quantity = sum([float(ingredient.split(" - ")[1].split()[0]) for ingredient in ingredients if " - " in ingredient])
     try:
-        total_quantity = sum([float(ingredient.split(" - ")[1].split()[0]) for ingredient in ingredients if " - " in ingredient])
+        for ingredient in ingredients: 
+            if " - " in ingredient:
+                total_quantity = sum([float(ingredient.split(" - ")[1].split()[0])]) # first split by " - " then split by space and take the first element
     except:
         pass
 
@@ -45,10 +47,12 @@ def visualize_cocktail_recipe(cocktail_json):
             try:
                 quantity_value = float(parts[1].split()[0]) 
             except ValueError:
-                quantity_value = float(Fraction(parts[1].split()[0]))
+                print("there is a fraction")
+                pass
+                # quantity_value = float(Fraction(parts[1].split()[0]))
 
         height = (quantity_value / total_quantity) * len(ingredients)
-        ax.fill_between([0, 1], y_offset, y_offset + height, label=ingredient_name, alpha=0.7)
+        ax.fill_between([0, 1], y_offset, y_offset + height, label=ingredient_name,alpha = 0.7)
         y_offset += height
 
     ax.set_xlim(0, 1)
@@ -70,7 +74,7 @@ visualize_cocktail_recipe(sample_cocktail)
 
 if __name__ == "__main__":
     # Function to get a random cocktail recipe
-    response = requests.get('http://127.0.0.1:8000/random_cocktail/')
+    response = requests.get('http://127.0.0.1:8000/cocktail/')
     # Sample cocktail JSON data
     sample_cocktail = json.dumps(response.json())
 
