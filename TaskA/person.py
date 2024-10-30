@@ -1,7 +1,7 @@
 #here i'm trying to understand the sample names and times that the api get request forms
 # while there is slight redundancy(first names start with alphabet and local time zone can be calculated), I want to understand the sample of users first. 
 # oh well! I realized that the users are from all over the world and the first letter is not always in english alphabet. 
-# Approaches considered for task B
+# Approaches considered for task A
 # iteration 1 : Address english alphabet only
     # Examine how many cocktails have names 
     # Examine how many users have first name in english alphabet
@@ -25,8 +25,6 @@ def offset_parser(offset_str:str):
 
     sign = -1 if sign == '-' else 1
     return sign, hours, minutes
-
-
 
 
 def get_person():

@@ -8,6 +8,7 @@
 import requests
 import sqlite3
 import datetime
+from fastapi import FastAPI
 
 from TaskA.person import get_person
 
@@ -17,6 +18,8 @@ from TaskA.person import get_person
 # cur = conn.cursor()
 # get the person details
 # first_name, first_letter, local_time = get_person()
+
+app = FastAPI()
 
 def suggest_cocktail():
     # connect to the database
@@ -99,7 +102,10 @@ def suggest_cocktail():
     finally:
         cur.close()
         conn.close()
-        
+
+@app.get("/suggestion/")
+def get_suggestion():
+    return suggest_cocktail()
 
 if __name__ == "__main__":
     from person import get_person

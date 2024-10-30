@@ -6,8 +6,12 @@ import requests
 
 app = FastAPI()
 
-@app.get("/random_cocktail/")
-def get_random_cocktail():
+@app.get("/")
+def read_root():
+    return {"Hello": "World"}
+
+@app.get("/cocktail/")
+def get_cocktail():
     try:
         # Make a request to the cocktail API to get a random cocktail
         response = requests.get("https://www.thecocktaildb.com/api/json/v1/1/random.php")

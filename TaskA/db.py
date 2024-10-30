@@ -68,8 +68,8 @@ for i in range(2,151):
             instructions = data['instructions']
 
             # handle the exception for ingredients that are not available
-            ingredients += [''] * (15 - len(ingredients))
-            ingredient_values = ingredients[:15]
+            ingredients += [''] * (15 - len(ingredients)) # Concanate the list with empty strings to make it 15 elements long
+            ingredient_values = ingredients[:15] # Get the first 15 ingredients
 
             # Insert the cocktail details into the table
             cur.execute("""
@@ -104,7 +104,7 @@ for i in range(2,151):
 show_table = cur.execute("SELECT * FROM cocktails")
 rows = cur.fetchall()
 
-print(rows)
+# print(rows)
 
 
 conn.commit()

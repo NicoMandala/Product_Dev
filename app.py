@@ -15,7 +15,7 @@ if st.button("Get Random Cocktail"):
 
         # Fetch and display a random cocktail in each column
         for col in columns:
-            response = requests.get('http://127.0.0.1:8000/random_cocktail/')
+            response = requests.get('http://127.0.0.1:8000/cocktail/')
             if response.status_code == 200:
                 data = response.json()
 
