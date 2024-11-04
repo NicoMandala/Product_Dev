@@ -2,7 +2,7 @@ from fastapi import FastAPI
 import requests
 
 # Initially I assumed that the ingredient names would be enough but the task B,I realized we need measurements as well. Note: Not all drinks have measurements and the units vary too. 
-# Initially I retrieved the API response as is which led to unclean response. Once it's switched to JSON, it's easier to parse the response.
+# Initially I retrieved the API response as-is which led to unclean response. Once it's switched to JSON, it's easier to parse the response.
 
 app = FastAPI()
 

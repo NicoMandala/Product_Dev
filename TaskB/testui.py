@@ -29,12 +29,9 @@ def visualize_cocktail_recipe(cocktail_json):
     # Create a visual representation of the cocktail ingredients
     fig, ax = plt.subplots(figsize=(3, 6))
     # total_quantity = sum([float(ingredient.split(" - ")[1].split()[0]) for ingredient in ingredients if " - " in ingredient])
-    try:
-        for ingredient in ingredients: 
-            if " - " in ingredient:
-                total_quantity = sum([float(ingredient.split(" - ")[1].split()[0])]) # first split by " - " then split by space and take the first element
-    except:
-        pass
+   
+    total_quantity = sum([float(ingredient.split(" - ")[1].split()[0]) for ingredient in ingredients if " - " in ingredient])
+    
 
     y_offset = 0
 
@@ -44,15 +41,12 @@ def visualize_cocktail_recipe(cocktail_json):
         # ingredient_name = parts[0] + "-" parts[1]
 
         if len(parts) ==2:
-            try:
-                quantity_value = float(parts[1].split()[0]) 
-            except ValueError:
-                print("there is a fraction")
-                pass
-                # quantity_value = float(Fraction(parts[1].split()[0]))
+            
+            quantity_value = float(parts[1].split()[0]) 
+            
 
         height = (quantity_value / total_quantity) * len(ingredients)
-        ax.fill_between([0, 1], y_offset, y_offset + height, label=ingredient_name,alpha = 0.7)
+        ax.fill_between([0, 1], y_offset, y_offset + height, label=ingredient_name, alpha=0.7)
         y_offset += height
 
     ax.set_xlim(0, 1)
