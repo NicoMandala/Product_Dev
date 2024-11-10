@@ -1,0 +1,26 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: cocktail-app-deployment
+  labels:
+    app: cocktail-app
+spec:
+  replicas: 3
+  selector:
+    matchLabels:
+      app: cocktail-app
+  template:
+    metadata:
+      labels:
+        app: cocktail-app
+    spec:
+      containers:
+      - name: cocktail-app
+        image: cmandala/cocktail-app:latest
+        ports:
+        - containerPort: 8080
+        env:
+        - name: UVICORN_HOST
+          value: "0.0.0.0"
+        - name: UVICORN_PORT
+          value: "8080"

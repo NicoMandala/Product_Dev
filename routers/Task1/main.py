@@ -1,16 +1,20 @@
-from fastapi import FastAPI
+from fastapi import FastAPI, APIRouter
 import requests
 
 # Initially I assumed that the ingredient names would be enough but the task B,I realized we need measurements as well. Note: Not all drinks have measurements and the units vary too. 
 # Initially I retrieved the API response as-is which led to unclean response. Once it's switched to JSON, it's easier to parse the response.
 
-app = FastAPI()
+# app = FastAPI()
 
-@app.get("/")
+# # Create a new route to get a cocktail
+router = APIRouter()
+
+
+@router.get("/")
 def read_root():
     return {"Hello": "World"}
 
-@app.get("/cocktail/")
+@router.get("/cocktail/")
 def get_cocktail():
     try:
         # Make a request to the cocktail API to get a random cocktail
@@ -40,7 +44,3 @@ def get_cocktail():
         }
     except Exception as e:
         return {f"An error occurred: {e}"}
-
-if __name__ == "__main__":
-    import uvicorn
-    uvicorn.run(app)

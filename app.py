@@ -3,7 +3,7 @@
 # Import necessary libraries
 import streamlit as st
 import requests
-from TaskA.main import suggest_cocktail
+from routers.TaskA.main import suggest_cocktail
 
 # Task 1: Get a Random Cocktail Recipe
 st.header("Task 1: Get a Random Cocktail Recipe")
