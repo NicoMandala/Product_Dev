@@ -18,6 +18,7 @@ from pydantic import BaseModel
 utc_time = datetime.datetime.utcnow()
 
 def offset_parser(offset_str:str):
+    # time is in the form +3:00 or -15:00
     offset_str = offset_str.replace(':','')
     sign = offset_str[0]
     minutes = int(offset_str[-2:])

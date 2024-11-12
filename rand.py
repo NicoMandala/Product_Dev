@@ -119,6 +119,6 @@ for i in range(1):
     ingredients = data['ingredients']
     for i in range(len(ingredients)):
         f"ingredient_{i}" == ingredients[i]
-        print(ingredient_1, ingredient_2)
+        # print(ingredient_1, ingredient_2)
     instructions = data['instructions']
     print(name, tagline, ingredients, instructions)

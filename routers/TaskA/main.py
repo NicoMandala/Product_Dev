@@ -66,7 +66,7 @@ def suggest_cocktail():
                          "suggestion":f"ehi {first_name}, why don't you try a {cocktail[1]}?"
                          })
                     
-                    except:
+                    except: # There are a couple of letters that don't have binding cocktail names in the database, this will handle the exception
                         cur.execute("""SELECT * FROM cocktails 
                                     ORDER BY RANDOM() 
                                     LIMIT 1;""")
@@ -79,7 +79,7 @@ def suggest_cocktail():
                          "suggestion":f"ehi {first_name}, how about a cocktail just made for you {cocktail[1]}?"
                          })
                         
-                else:
+                else: # if the first name is not in English alphabet
                     try:
                         cur.execute("""SELECT * FROM cocktails 
                                     ORDER BY RANDOM() 
